@@ -1,0 +1,201 @@
+---
+import Base from '../layouts/Base.astro';
+import { url } from '../lib/url';
+import { site, hours, owner, proof, spaces, bridal } from '../data/site';
+
+// Their current site ships <title>Welcome</title> -- the untouched GoDaddy
+// default -- so every browser tab and every Google result reads "Welcome".
+const title = 'The Spa & Studio at MDS | Luxury Day Spa & Hair Studio in Murrysville, PA';
+const description =
+  'Luxury day spa, nail lounge and hair studio in Murrysville, PA. Facials and HydraFacial, massage, lashes, brows, nails, hair and award-winning bridal makeup. Book online.';
+---
+
+<Base title={title} description={description} preloadImage="/images/lounge.jpg">
+  <section class="hero" id="top">
+    <div class="hero__media">
+      <img src={url('/images/lounge.jpg')} alt="" width="933" height="1400" fetchpriority="high" />
+    </div>
+    <div class="wrap hero__in">
+      <p class="eyebrow">Murrysville, Pennsylvania</p>
+      <h1>A day spa and hair studio built <em>for staying a while.</em></h1>
+      <p>
+        Three treatment rooms upstairs, a nail lounge on the main floor, and a
+        studio below. All of it in a building we own and renovated from the ground up.
+      </p>
+      <div class="hero__cta">
+        <a class="btn btn--brass" href={site.bookingUrl} target="_blank" rel="noopener">Book online</a>
+        <a class="btn btn--ghost" href="#spaces">See the services</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="proof">
+    <div class="proof__grid">
+      {proof.map((p) => (
+        <div class="proof__cell">
+          <strong>{p.figure}</strong>
+          <span>{p.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id="spaces">
+    <div class="wrap">
+      <p class="eyebrow">Three spaces, one building</p>
+      <h2>The spa, the nail lounge and the studio.</h2>
+      <p class="lede">
+        Every service below is bookable online. If you are not sure what you need,
+        call and ask for a recommendation &mdash; that is free and takes a minute.
+      </p>
+    </div>
+
+    <div class="wrap" style="margin-top:clamp(2.5rem,6vw,4rem)">
+      {spaces.map((s, i) => (
+        <div class={i % 2 === 1 ? 'space space--flip' : 'space'}>
+          <div>
+            <p class="space__where">{s.where}</p>
+            <h3 style="font-size:clamp(1.5rem,3vw,2rem)">{s.name}</h3>
+            <p>{s.blurb}</p>
+            <ul class="list">
+              {s.services.map((x) => <li>{x}</li>)}
+            </ul>
+          </div>
+          <figure>
+            <img src={url(s.image)} alt={s.alt} width="975" height="1300" loading="lazy" />
+          </figure>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section section--dark" id="bridal">
+    <div class="wrap">
+      <div class="space">
+        <div>
+          <p class="eyebrow">Weddings</p>
+          <h2>Bridal hair and makeup.</h2>
+          <p>
+            {owner.name} has been doing bridal makeup for over fifteen years and was named
+            {' '}{owner.award}. The studio has taken a WeddingWire Couples&rsquo; Choice award
+            seven years running.
+          </p>
+          <p>
+            Start with a preview so nothing about the morning is a surprise, then we handle
+            the bride and the whole wedding party on the day.
+          </p>
+          <p style="margin-top:1.8rem">
+            <a class="btn btn--brass" href={site.bookingUrl} target="_blank" rel="noopener">Book a bridal preview</a>
+          </p>
+        </div>
+        <div>
+          <div class="price">
+            <div>
+              {bridal.map((b) => (
+                <div class="price__row">
+                  <span>{b.item}</span>
+                  <span class="price__dots"></span>
+                  <span class="price__amt">${b.price}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+          <p style="font-size:.85rem;margin-top:1.2rem;color:#9a8d82">
+            Prices as listed on our bridal menu. Travel and party sizes are quoted
+            individually &mdash; ask when you enquire.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section section--bone" id="team">
+    <div class="wrap">
+      <div class="space">
+        <figure>
+          <img class="wide" src={url('/images/team.jpg')} alt="The front desk at The Spa & Studio at MDS" width="1300" height="866" loading="lazy" />
+        </figure>
+        <div>
+          <p class="eyebrow">The people</p>
+          <h2>Every one of us is licensed.</h2>
+          <p>
+            {owner.name} owns the place and still works the chair &mdash; {owner.licences.toLowerCase()},
+            and {owner.years.toLowerCase()}.
+          </p>
+          <p>
+            Behind her is a full team of hairstylists, estheticians, nail technicians, a massage
+            therapist and a wedding coordinator. Everyone is educated, licensed and certified,
+            and we take that seriously.
+          </p>
+          <p style="margin-top:1.6rem">
+            <a class="btn btn--outline" href={site.bookingUrl} target="_blank" rel="noopener">Book with a specific artist</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="visit">
+    <div class="wrap">
+      <p class="eyebrow">Visit</p>
+      <h2>Find us on Old William Penn Highway.</h2>
+      <div class="visit" style="margin-top:2.5rem">
+        <div class="card">
+          <h3>Hours</h3>
+          <table class="hours">
+            <tbody>
+              {hours.map((h) => (
+                <tr>
+                  <th scope="row">{h.day}</th>
+                  <td class={h.open ? '' : 'closed'}>{h.open ? `${h.open} – ${h.close}` : h.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card">
+          <h3>Get in touch</h3>
+          <dl class="detail">
+            <div>
+              <dt>Call</dt>
+              <dd><a href={site.phoneHref}>{site.phone}</a></dd>
+            </div>
+            <div>
+              <dt>Email</dt>
+              <dd><a href={`mailto:${site.email}`}>{site.email}</a></dd>
+            </div>
+            <div>
+              <dt>Find us</dt>
+              <dd>
+                <a href={site.mapsUrl} target="_blank" rel="noopener">
+                  {site.address.street}<br />
+                  {site.address.city}, {site.address.state} {site.address.zip}
+                </a>
+              </dd>
+            </div>
+          </dl>
+        </div>
+
+        <div class="card">
+          <h3>Book or gift</h3>
+          <p style="font-size:.96rem">
+            Booking is online and open around the clock. Gift cards are the easy answer
+            for somebody who is difficult to buy for.
+          </p>
+          <p style="margin-top:1.3rem">
+            <a class="btn btn--brass" href={site.bookingUrl} target="_blank" rel="noopener">Book online</a>
+          </p>
+          <p style="margin:.7rem 0 0">
+            <a class="btn btn--outline" href={site.giftCardUrl} target="_blank" rel="noopener">Buy a gift card</a>
+          </p>
+        </div>
+      </div>
+
+      <p style="margin-top:2rem;font-size:.9rem;color:var(--ink-faint)">
+        Please give us 24 hours&rsquo; notice to reschedule or cancel. Inside 24 hours is
+        charged at 50%, and a no-show or same-day cancellation at 100%.
+      </p>
+    </div>
+  </section>
+</Base>

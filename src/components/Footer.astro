@@ -1,0 +1,42 @@
+---
+import { site, hours } from '../data/site';
+// Computed at build time. Their current site carries no footer copyright at all.
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <h4>The Spa &amp; Studio at MDS</h4>
+        <p>{site.tagline}. {site.formerly}.</p>
+        <p><a href={site.instagram} target="_blank" rel="noopener">Instagram</a></p>
+      </div>
+      <div>
+        <h4>Visit</h4>
+        <p>
+          <a href={site.mapsUrl} target="_blank" rel="noopener">
+            {site.address.street}<br />
+            {site.address.city}, {site.address.state} {site.address.zip}
+          </a>
+        </p>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p><a href={site.phoneHref}>{site.phone}</a></p>
+        <p><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        {hours.filter((h) => h.open).map((h) => (
+          <p style="margin:0">{h.day.slice(0, 3)} &nbsp;{h.open} &ndash; {h.close}</p>
+        ))}
+        <p style="margin:.4rem 0 0">Sunday and Monday closed</p>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>&copy; {year} The Spa &amp; Studio at MDS. All rights reserved.</span>
+      <span>Murrysville, Pennsylvania</span>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,29 @@
+---
+import { site } from '../data/site';
+---
+
+<div class="topbar">
+  <div class="wrap topbar__in">
+    <span>{site.address.street}, {site.address.city}, {site.address.state}</span>
+    <span>Tue&ndash;Thu 9&ndash;8 &middot; Fri 9&ndash;5 &middot; Sat 9&ndash;4</span>
+    <a href={site.phoneHref}>{site.phone}</a>
+  </div>
+</div>
+
+<header class="header">
+  <div class="wrap header__in">
+    <a class="brand" href="#top">
+      <span class="brand__mark">The Spa <em>&amp;</em> Studio at MDS</span>
+      <span class="brand__sub">Murrysville, Pennsylvania</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      <span class="nav__links">
+        <a href="#spaces">Services</a>
+        <a href="#bridal">Bridal</a>
+        <a href="#team">The team</a>
+        <a href="#visit">Visit</a>
+      </span>
+      <a class="btn btn--brass" href={site.bookingUrl} target="_blank" rel="noopener">Book online</a>
+    </nav>
+  </div>
+</header>

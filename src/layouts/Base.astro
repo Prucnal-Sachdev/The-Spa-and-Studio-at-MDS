@@ -1,0 +1,80 @@
+---
+import { url } from '../lib/url';
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site, hoursSchema } from '../data/site';
+
+interface Props {
+  title: string;
+  description: string;
+  preloadImage?: string;
+}
+const { title, description, preloadImage } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).href;
+
+// The preview deployment builds with PUBLIC_NOINDEX=1 so it never competes with
+// the live site in search results.
+const noindex = import.meta.env.PUBLIC_NOINDEX === '1';
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': ['HealthAndBeautyBusiness', 'DaySpa', 'HairSalon'],
+  '@id': `${site.url}/#business`,
+  name: site.name,
+  description:
+    'Luxury day spa, nail lounge and hair studio in Murrysville, PA. Facials, HydraFacial, massage, lashes, nails, hair and award-winning bridal makeup.',
+  url: site.url,
+  telephone: site.phone,
+  email: site.email,
+  address: {
+    '@type': 'PostalAddress',
+    streetAddress: site.address.street,
+    addressLocality: site.address.city,
+    addressRegion: site.address.state,
+    postalCode: site.address.zip,
+    addressCountry: 'US',
+  },
+  sameAs: [site.instagram],
+  potentialAction: {
+    '@type': 'ReserveAction',
+    target: { '@type': 'EntryPoint', urlTemplate: site.bookingUrl },
+  },
+  openingHoursSpecification: hoursSchema.map((h) => ({
+    '@type': 'OpeningHoursSpecification',
+    dayOfWeek: h.days,
+    opens: h.opens,
+    closes: h.closes,
+  })),
+};
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={site.name} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    {preloadImage && <link rel="preload" as="image" href={url(preloadImage)} />}
+    <meta name="theme-color" content="#100d0b" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <Header />
+    <main id="main"><slot /></main>
+    <Footer />
+  </body>
+</html>

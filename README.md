@@ -3,7 +3,7 @@
 A speculative rebuild of the homepage for The Spa & Studio at MDS (Murrysville, PA),
 built by Prucnal & Sachdev. Not commissioned; built to show what the site could be.
 
-- **Preview:** https://prucnalj.github.io/The-Spa-and-Studio-at-MDS/ (built `noindex`, so
+- **Preview:** https://prucnal-sachdev.github.io/The-Spa-and-Studio-at-MDS/ (built `noindex`, so
   it never competes with their live site in search)
 - **Their current site:** https://thespaandstudioatmds.com
 - **Open questions:** [CONTENT-NEEDED.md](CONTENT-NEEDED.md)
@@ -45,7 +45,7 @@ Building the way the preview builds — note `MSYS_NO_PATHCONV=1`, without which
 rewrites `BASE_PATH` into a Windows path and every URL in the output is silently wrong:
 
 ```bash
-MSYS_NO_PATHCONV=1 SITE_URL=https://prucnalj.github.io BASE_PATH=/The-Spa-and-Studio-at-MDS \
+MSYS_NO_PATHCONV=1 SITE_URL=https://prucnal-sachdev.github.io BASE_PATH=/The-Spa-and-Studio-at-MDS \
   PUBLIC_NOINDEX=1 npm run build
 ```
 

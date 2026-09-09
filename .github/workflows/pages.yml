@@ -1,4 +1,4 @@
-# Temporary review deployment to GitHub Pages at https://prucnalj.github.io/The-Spa-and-Studio-at-MDS/
+# Temporary review deployment to GitHub Pages at https://prucnal-sachdev.github.io/The-Spa-and-Studio-at-MDS/
 # Production hosting is Netlify (see netlify.toml); this workflow only exists so the
 # site can be previewed at a public URL before the client has bought anything. The
 # build is marked noindex so a preview never competes with the client's real site.
@@ -39,7 +39,7 @@ jobs:
       - run: npm ci
       - run: npm run build
         env:
-          SITE_URL: https://prucnalj.github.io
+          SITE_URL: https://prucnal-sachdev.github.io
           BASE_PATH: /The-Spa-and-Studio-at-MDS
           PUBLIC_NOINDEX: '1'
       - uses: actions/upload-pages-artifact@v3

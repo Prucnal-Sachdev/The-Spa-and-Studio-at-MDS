@@ -2,7 +2,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 
 // Production values. The GitHub Pages preview workflow (.github/workflows/pages.yml)
-// overrides both so the site can be served from https://prucnalj.github.io/The-Spa-and-Studio-at-MDS/.
+// overrides both so the site can be served from https://prucnal-sachdev.github.io/The-Spa-and-Studio-at-MDS/.
 const site = process.env.SITE_URL ?? 'https://thespaandstudioatmds.com';
 const base = process.env.BASE_PATH ?? '/';
 
